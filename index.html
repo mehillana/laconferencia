@@ -9,10 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
     /* Reset bàsic i estètica neta sense marcs ni ombres */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; }
     body {
       margin: 0;
       padding: 2rem 1.25rem 4rem;
@@ -21,12 +18,7 @@
       font-family: 'Google Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       line-height: 1.5;
     }
-
-    .page {
-      max-width: 780px;
-      margin: 0 auto;
-    }
-
+    .page { max-width: 780px; margin: 0 auto; }
     header {
       display: flex;
       flex-wrap: wrap;
@@ -37,34 +29,10 @@
       border-bottom: 1px solid #e4e4e7;
       margin-bottom: 2.25rem;
     }
-
-    .site-title {
-      margin: 0;
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-    }
-
-    .cover-image {
-      display: block;
-      max-width: 100%;
-      width: auto;
-      height: auto;
-      margin-bottom: 1.25rem;
-    }
-
-    .cover-fallback {
-      margin: 0 0 1.25rem;
-      color: #71717a;
-      font-size: 0.875rem;
-    }
-
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
+    .site-title { margin: 0; font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; }
+    .cover-image { display: block; max-width: 100%; width: auto; height: auto; margin-bottom: 1.25rem; }
+    .cover-fallback { margin: 0 0 1.25rem; color: #71717a; font-size: 0.875rem; }
+    .controls { display: flex; align-items: center; gap: 0.75rem; }
     button {
       font-family: inherit;
       font-size: 0.9rem;
@@ -76,79 +44,24 @@
       padding: 0.45rem 0.85rem;
       cursor: pointer;
     }
-
-    button:hover:not(:disabled) {
-      background-color: #f4f4f5;
-      border-color: #a1a1aa;
-    }
-
-    button:disabled {
-      opacity: 0.35;
-      cursor: default;
-    }
-
-    .counter {
-      font-size: 0.875rem;
-      color: #52525b;
-      min-width: 4.2rem;
-      text-align: center;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .strip-title {
-      margin: 0 0 1.25rem;
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.015em;
-    }
-
-    .strip-image {
-      display: block;
-      max-width: 100%;
-      width: auto;
-      height: auto;
-      margin: 0 auto;
-    }
-
-    .missing-file {
-      padding: 3rem 0;
-      color: #71717a;
-      font-size: 0.95rem;
-    }
-
-    footer {
-      margin-top: 4rem;
-      padding-top: 1.75rem;
-      border-top: 1px solid #e4e4e7;
-    }
-
-    .copyright-image {
-      display: block;
-      max-width: 100%;
-      width: auto;
-      height: auto;
-    }
-
-    .license-fallback {
-      color: #52525b;
-      font-size: 0.85rem;
-      line-height: 1.6;
-    }
-
-    .license-fallback p {
-      margin: 0 0 0.6rem;
-    }
-
-    .license-fallback p:last-child {
-      margin-bottom: 0;
-    }
+    button:hover:not(:disabled) { background-color: #f4f4f5; border-color: #a1a1aa; }
+    button:disabled { opacity: 0.35; cursor: default; }
+    .counter { font-size: 0.875rem; color: #52525b; min-width: 4.2rem; text-align: center; font-variant-numeric: tabular-nums; }
+    .strip-title { margin: 0 0 1.25rem; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.015em; }
+    .strip-image { display: block; max-width: 100%; width: auto; height: auto; margin: 0 auto; }
+    .missing-file { padding: 3rem 0; color: #71717a; font-size: 0.95rem; }
+    footer { margin-top: 4rem; padding-top: 1.75rem; border-top: 1px solid #e4e4e7; }
+    .copyright-image { display: block; max-width: 100%; width: auto; height: auto; }
+    .license-fallback { color: #52525b; font-size: 0.85rem; line-height: 1.6; }
+    .license-fallback p { margin: 0 0 0.6rem; }
+    .license-fallback p:last-child { margin-bottom: 0; }
   </style>
 </head>
 <body>
   <div class="page">
     <header>
       <div id="cover-slot" class="w-full">
-        <img id="cover-img" class="cover-image" src="./portada.jpg" alt="Portada de La Conferència" />
+        <img id="cover-img" class="cover-image" src="./portada.png" alt="Portada de La Conferència" />
       </div>
       <h1 class="site-title">La Conferència</h1>
       <nav class="controls" aria-label="Navegació entre tires">
@@ -172,43 +85,43 @@
 
   <script>
     // Llista completa de noms de fitxers per a les 35 tires:
-    // 10 tires actuals + 25 pròxims còmics (Ilustración11.jpg .. Ilustración35.jpg)
+    // 10 tires actuals + 25 pròxims còmics (Ilustración11.png .. Ilustración35.png)
     const FILENAMES = [
-      'Ilustración.jpg',
-      'Ilustración2.jpg',
-      'Ilustración3.jpg',
-      'Ilustración4.jpg',
-      'Ilustración5.jpg',
-      'Ilustración6.jpg',
-      'Ilustración7.jpg',
-      'Ilustración8.jpg',
-      'Ilustración9.jpg',
-      'Ilustración10.jpg',
-      'Ilustración11.jpg',
-      'Ilustración12.jpg',
-      'Ilustración13.jpg',
-      'Ilustración14.jpg',
-      'Ilustración15.jpg',
-      'Ilustración16.jpg',
-      'Ilustración17.jpg',
-      'Ilustración18.jpg',
-      'Ilustración19.jpg',
-      'Ilustración20.jpg',
-      'Ilustración21.jpg',
-      'Ilustración22.jpg',
-      'Ilustración23.jpg',
-      'Ilustración24.jpg',
-      'Ilustración25.jpg',
-      'Ilustración26.jpg',
-      'Ilustración27.jpg',
-      'Ilustración28.jpg',
-      'Ilustración29.jpg',
-      'Ilustración30.jpg',
-      'Ilustración31.jpg',
-      'Ilustración32.jpg',
-      'Ilustración33.jpg',
-      'Ilustración34.jpg',
-      'Ilustración35.jpg'
+      'Ilustración.png',
+      'Ilustración2.png',
+      'Ilustración3.png',
+      'Ilustración4.png',
+      'Ilustración5.png',
+      'Ilustración6.png',
+      'Ilustración7.png',
+      'Ilustración8.png',
+      'Ilustración9.png',
+      'Ilustración10.png',
+      'Ilustración11.png',
+      'Ilustración12.png',
+      'Ilustración13.png',
+      'Ilustración14.png',
+      'Ilustración15.png',
+      'Ilustración16.png',
+      'Ilustración17.png',
+      'Ilustración18.png',
+      'Ilustración19.png',
+      'Ilustración20.png',
+      'Ilustración21.png',
+      'Ilustración22.png',
+      'Ilustración23.png',
+      'Ilustración24.png',
+      'Ilustración25.png',
+      'Ilustración26.png',
+      'Ilustración27.png',
+      'Ilustración28.png',
+      'Ilustración29.png',
+      'Ilustración30.png',
+      'Ilustración31.png',
+      'Ilustración32.png',
+      'Ilustración33.png',
+      'Ilustración34.png',
+      'Ilustración35.png'
     ];
 
     const KNOWN_TITLES = {
@@ -296,7 +209,7 @@
       }
     });
 
-    // Fallback net per a portada.jpg si no existeix encara
+    // Fallback net per a portada.png si no existeix encara
     const coverImg = document.getElementById('cover-img');
     const coverSlot = document.getElementById('cover-slot');
     if (coverImg && coverSlot) {
@@ -304,7 +217,7 @@
         coverSlot.innerHTML = '';
         const p = document.createElement('p');
         p.className = 'cover-fallback';
-        p.textContent = 'portada.jpg';
+        p.textContent = 'portada.png';
         coverSlot.appendChild(p);
       });
     }
