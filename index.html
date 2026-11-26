@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Conferència</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset bàsic i estètica neta sense marcs ni ombres */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem 1.25rem 4rem;
+      background-color: #fafafa;
+      color: #18181b;
+      font-family: 'Google Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #e4e4e7;
+      margin-bottom: 2.25rem;
+    }
+
+    .site-title {
+      margin: 0;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .cover-image {
+      display: block;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      margin-bottom: 1.25rem;
+    }
+
+    .cover-fallback {
+      margin: 0 0 1.25rem;
+      color: #71717a;
+      font-size: 0.875rem;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    button {
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #18181b;
+      background-color: #ffffff;
+      border: 1px solid #d4d4d8;
+      border-radius: 6px;
+      padding: 0.45rem 0.85rem;
+      cursor: pointer;
+    }
+
+    button:hover:not(:disabled) {
+      background-color: #f4f4f5;
+      border-color: #a1a1aa;
+    }
+
+    button:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    .counter {
+      font-size: 0.875rem;
+      color: #52525b;
+      min-width: 4.2rem;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .strip-title {
+      margin: 0 0 1.25rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+
+    .strip-image {
+      display: block;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .missing-file {
+      padding: 3rem 0;
+      color: #71717a;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid #e4e4e7;
+    }
+
+    .copyright-image {
+      display: block;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+    }
+
+    .license-fallback {
+      color: #52525b;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .license-fallback p {
+      margin: 0 0 0.6rem;
+    }
+
+    .license-fallback p:last-child {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div id="cover-slot" class="w-full">
+        <img id="cover-img" class="cover-image" src="./portada.jpg" alt="Portada de La Conferència" />
+      </div>
+      <h1 class="site-title">La Conferència</h1>
+      <nav class="controls" aria-label="Navegació entre tires">
+        <button id="prev-btn" type="button">Anterior</button>
+        <span id="counter" class="counter">1 / 35</span>
+        <button id="next-btn" type="button">Següent</button>
+      </nav>
+    </header>
+
+    <main>
+      <h2 id="strip-title" class="strip-title"></h2>
+      <div id="strip-media"></div>
+    </main>
+
+    <footer>
+      <div id="copyright-slot">
+        <img id="copyright-img" class="copyright-image" src="./copyright.png" alt="Copyright La Conferència" />
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Llista completa de noms de fitxers per a les 35 tires:
+    // 10 tires actuals + 25 pròxims còmics (Ilustración11.jpg .. Ilustración35.jpg)
+    const FILENAMES = [
+      'Ilustración.jpg',
+      'Ilustración2.jpg',
+      'Ilustración3.jpg',
+      'Ilustración4.jpg',
+      'Ilustración5.jpg',
+      'Ilustración6.jpg',
+      'Ilustración7.jpg',
+      'Ilustración8.jpg',
+      'Ilustración9.jpg',
+      'Ilustración10.jpg',
+      'Ilustración11.jpg',
+      'Ilustración12.jpg',
+      'Ilustración13.jpg',
+      'Ilustración14.jpg',
+      'Ilustración15.jpg',
+      'Ilustración16.jpg',
+      'Ilustración17.jpg',
+      'Ilustración18.jpg',
+      'Ilustración19.jpg',
+      'Ilustración20.jpg',
+      'Ilustración21.jpg',
+      'Ilustración22.jpg',
+      'Ilustración23.jpg',
+      'Ilustración24.jpg',
+      'Ilustración25.jpg',
+      'Ilustración26.jpg',
+      'Ilustración27.jpg',
+      'Ilustración28.jpg',
+      'Ilustración29.jpg',
+      'Ilustración30.jpg',
+      'Ilustración31.jpg',
+      'Ilustración32.jpg',
+      'Ilustración33.jpg',
+      'Ilustración34.jpg',
+      'Ilustración35.jpg'
+    ];
+
+    const KNOWN_TITLES = {
+      1: 'En campanya',
+      2: 'Publicitat (massa) convincent',
+      3: 'Rufián no és més guapo que Etienne González',
+      4: 'Sí, definitivament ÉS el consumisme',
+      5: 'Processos i processos',
+      6: 'Vaga general!',
+      7: "Institut d'Estudis Merdes",
+      8: 'Aquest Google podria no ser Google',
+      9: 'Carnestoltes',
+      10: 'Nàusees'
+    };
+
+    // Array de 35 tires
+    const strips = FILENAMES.map((file, idx) => {
+      const number = idx + 1;
+      return {
+        number,
+        title: KNOWN_TITLES[number] || `Tira ${number}`,
+        src: `./${file}`,
+        filename: file
+      };
+    });
+
+    let currentIndex = 0;
+
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const counterEl = document.getElementById('counter');
+    const titleEl = document.getElementById('strip-title');
+    const mediaEl = document.getElementById('strip-media');
+
+    function renderStrip(index) {
+      const strip = strips[index];
+      if (!strip) return;
+
+      titleEl.textContent = strip.title;
+      counterEl.textContent = `${index + 1} / ${strips.length}`;
+
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === strips.length - 1;
+
+      mediaEl.innerHTML = '';
+
+      const img = document.createElement('img');
+      img.className = 'strip-image';
+      img.src = strip.src;
+      img.alt = strip.title;
+
+      img.addEventListener('error', () => {
+        mediaEl.innerHTML = '';
+        const fallback = document.createElement('p');
+        fallback.className = 'missing-file';
+        fallback.textContent = strip.filename;
+        mediaEl.appendChild(fallback);
+      });
+
+      mediaEl.appendChild(img);
+    }
+
+    function goPrev() {
+      if (currentIndex > 0) {
+        currentIndex -= 1;
+        renderStrip(currentIndex);
+      }
+    }
+
+    function goNext() {
+      if (currentIndex < strips.length - 1) {
+        currentIndex += 1;
+        renderStrip(currentIndex);
+      }
+    }
+
+    prevBtn.addEventListener('click', goPrev);
+    nextBtn.addEventListener('click', goNext);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') {
+        goPrev();
+      } else if (event.key === 'ArrowRight') {
+        goNext();
+      }
+    });
+
+    // Fallback net per a portada.jpg si no existeix encara
+    const coverImg = document.getElementById('cover-img');
+    const coverSlot = document.getElementById('cover-slot');
+    if (coverImg && coverSlot) {
+      coverImg.addEventListener('error', () => {
+        coverSlot.innerHTML = '';
+        const p = document.createElement('p');
+        p.className = 'cover-fallback';
+        p.textContent = 'portada.jpg';
+        coverSlot.appendChild(p);
+      });
+    }
+
+    // Fallback net a text pla de la llicència si ./copyright.png no existeix
+    const copyrightImg = document.getElementById('copyright-img');
+    const copyrightSlot = document.getElementById('copyright-slot');
+    if (copyrightImg && copyrightSlot) {
+      copyrightImg.addEventListener('error', () => {
+        copyrightSlot.innerHTML = `
+          <div class="license-fallback">
+            <p><strong>2026 - Etienne "Eichi" González</strong></p>
+            <p>Tots els drets <span style="text-decoration: line-through;">llençats per la finestra</span> reservats.</p>
+            <p>Aquesta obra està intencionadament sota llicència <strong>Etiennev1Atribució-DefinitivamentAtribucióFideuà</strong>, que et dona el dret a fer que el que et surti del cul amb això, però dir que ho he fet jo.</p>
+            <p><strong>Feliç <span style="text-decoration: line-through;">lectura</span> telenotícies.</strong></p>
+          </div>
+        `;
+      });
+    }
+
+    renderStrip(currentIndex);
+  </script>
+</body>
+</html>
